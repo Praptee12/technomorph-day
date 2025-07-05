@@ -1,0 +1,59 @@
+int pin1 = 1;
+int pin2 = 2;
+int pin3 = 3;
+int pin4 = 4;
+
+int potPin = A5;
+int potValue;
+
+int power = 255;
+
+
+void setup()
+{
+  pinMode(pin1, OUTPUT);
+  pinMode(pin2, OUTPUT);
+  pinMode(pin3, OUTPUT);
+  pinMode(pin4, OUTPUT);
+  
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  
+  digitalWrite(5, HIGH);
+  digitalWrite(6, HIGH);
+  digitalWrite(7, HIGH);
+  
+  Motor1_Forward();
+  Motor2_Backward();
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  potValue = analogRead(potPin);
+  power = map(potValue, 0, 1023, 0, 255);
+  
+  analogWrite(9, power);
+  analogWrite(10, power);
+  
+  //Motor1_Backward();
+  //Motor2_Forward();
+  delay(100);  
+}
+
+void Motor1_Forward(){
+	digitalWrite(pin1, HIGH);
+  	digitalWrite(pin2, LOW);
+}
+void Motor1_Backward(){
+  digitalWrite(pin1, LOW);
+  digitalWrite(pin2, HIGH);
+}
+void Motor2_Forward(){
+	digitalWrite(pin3, HIGH);
+  	digitalWrite(pin4, LOW);
+}
+void Motor2_Backward(){
+	digitalWrite(pin3, LOW);
+  	digitalWrite(pin4, HIGH);
+}
